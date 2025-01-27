@@ -46,16 +46,17 @@ namespace WebAPI.Controllers
         [Produces("application/json", "text/plain")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Address))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
-        [HttpGet("getbyid")]
-        public async Task<IActionResult> GetById(int createdUserId)
+        [HttpGet("getbyaddress")]
+        public async Task<IActionResult> GetByAddress([FromQuery] string street, [FromQuery] int streetNumber)
         {
-            var result = await Mediator.Send(new GetAddressQuery { CreatedUserId = createdUserId });
+            var result = await Mediator.Send(new GetAddressQuery { Street = street, StreetNumber = streetNumber });
             if (result.Success)
             {
                 return Ok(result.Data);
             }
             return BadRequest(result.Message);
         }
+
 
         /// <summary>
         /// Add Address.

@@ -18,7 +18,10 @@ namespace Business.Handlers.Products.Commands
     /// </summary>
     public class DeleteProductCommand : IRequest<IResult>
     {
-        public int CreatedUserId { get; set; }
+        public string Category { get; set; }
+        public string ProductName { get; set; }
+        public string ColorName { get; set; }
+
 
         public class DeleteProductCommandHandler : IRequestHandler<DeleteProductCommand, IResult>
         {
@@ -36,7 +39,9 @@ namespace Business.Handlers.Products.Commands
             [SecuredOperation(Priority = 1)]
             public async Task<IResult> Handle(DeleteProductCommand request, CancellationToken cancellationToken)
             {
-                var productToDelete = _productRepository.Get(p => p.CreatedUserId == request.CreatedUserId);
+                var productToDelete = await _productRepository.GetAsync(p => p.Category == request.Category
+                                                               && p.ProductName == request.ProductName
+                                                               && p.ColorName == request.ColorName);
 
                 _productRepository.Delete(productToDelete);
                 await _productRepository.SaveChangesAsync();

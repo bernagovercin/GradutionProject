@@ -51,7 +51,9 @@ namespace Business.Handlers.Products.Commands
             [SecuredOperation(Priority = 1)]
             public async Task<IResult> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
             {
-                var isThereProductRecord = await _productRepository.GetAsync(u => u.CreatedUserId == request.CreatedUserId);
+                var isThereProductRecord = await _productRepository.GetAsync(u => u.Category == request.Category
+                                                                && u.ProductName == request.ProductName
+                                                                && u.ColorName == request.ColorName);
 
 
                 isThereProductRecord.CreatedDate = request.CreatedDate;

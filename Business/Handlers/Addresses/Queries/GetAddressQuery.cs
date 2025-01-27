@@ -14,7 +14,8 @@ namespace Business.Handlers.Addresses.Queries
 {
     public class GetAddressQuery : IRequest<IDataResult<Address>>
     {
-        public int CreatedUserId { get; set; }
+        public string Street { get; set; } // Cadde adı
+        public int StreetNumber { get; set; } // Sokak numarası
 
         public class GetAddressQueryHandler : IRequestHandler<GetAddressQuery, IDataResult<Address>>
         {
@@ -30,7 +31,7 @@ namespace Business.Handlers.Addresses.Queries
             [SecuredOperation(Priority = 1)]
             public async Task<IDataResult<Address>> Handle(GetAddressQuery request, CancellationToken cancellationToken)
             {
-                var address = await _addressRepository.GetAsync(p => p.CreatedUserId == request.CreatedUserId);
+                var address = await _addressRepository.GetAsync(p => p.Street == request.Street && p.StreetNumber == request.StreetNumber);
                 return new SuccessDataResult<Address>(address);
             }
         }

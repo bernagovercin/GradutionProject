@@ -47,15 +47,16 @@ namespace WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Product))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
         [HttpGet("getbyid")]
-        public async Task<IActionResult> GetById(int createdUserId)
+        public async Task<IActionResult> GetById([FromQuery] string category, [FromQuery] string productName, [FromQuery] string colorName)
         {
-            var result = await Mediator.Send(new GetProductQuery { CreatedUserId = createdUserId });
+            var result = await Mediator.Send(new GetProductQuery { Category = category, ProductName = productName, ColorName = colorName });
             if (result.Success)
             {
                 return Ok(result.Data);
             }
             return BadRequest(result.Message);
         }
+
 
         /// <summary>
         /// Add Product.

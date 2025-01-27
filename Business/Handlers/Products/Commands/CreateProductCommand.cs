@@ -51,7 +51,9 @@ namespace Business.Handlers.Products.Commands
             [SecuredOperation(Priority = 1)]
             public async Task<IResult> Handle(CreateProductCommand request, CancellationToken cancellationToken)
             {
-                var isThereProductRecord = _productRepository.Query().Any(u => u.CreatedDate == request.CreatedDate);
+                var isThereProductRecord = _productRepository.Query().Any(u => u.Category == request.Category
+                                                                   && u.ProductName == request.ProductName
+                                                                   && u.ColorName == request.ColorName);
 
                 if (isThereProductRecord == true)
                     return new ErrorResult(Messages.NameAlreadyExist);

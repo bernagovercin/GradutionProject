@@ -49,7 +49,7 @@ namespace Business.Handlers.PhoneNumbers.Commands
             [SecuredOperation(Priority = 1)]
             public async Task<IResult> Handle(UpdatePhoneNumberCommand request, CancellationToken cancellationToken)
             {
-                var isTherePhoneNumberRecord = await _phoneNumberRepository.GetAsync(u => u.CreatedUserId == request.CreatedUserId);
+                var isTherePhoneNumberRecord = await _phoneNumberRepository.GetAsync(u => u.CustomerId == request.CustomerId);
 
 
                 isTherePhoneNumberRecord.CreatedDate = request.CreatedDate;

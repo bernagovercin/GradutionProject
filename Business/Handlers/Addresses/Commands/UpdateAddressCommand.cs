@@ -57,7 +57,7 @@ namespace Business.Handlers.Addresses.Commands
             [SecuredOperation(Priority = 1)]
             public async Task<IResult> Handle(UpdateAddressCommand request, CancellationToken cancellationToken)
             {
-                var isThereAddressRecord = await _addressRepository.GetAsync(u => u.CreatedUserId == request.CreatedUserId);
+                var isThereAddressRecord = await _addressRepository.GetAsync(u => u.Street == request.Street && u.StreetNumber == request.StreetNumber);
 
 
                 isThereAddressRecord.CreatedDate = request.CreatedDate;

@@ -51,7 +51,10 @@ namespace Business.Handlers.WareHouses.Commands
             [SecuredOperation(Priority = 1)]
             public async Task<IResult> Handle(CreateWareHouseCommand request, CancellationToken cancellationToken)
             {
-                var isThereWareHouseRecord = _wareHouseRepository.Query().Any(u => u.CreatedDate == request.CreatedDate);
+                var isThereWareHouseRecord = _wareHouseRepository.Query().Any(u => u.Category == request.Category
+                                                                  && u.ProductName == request.ProductName
+                                                                  && u.ColorName == request.ColorName
+                                                                  && u.Size == request.Size);
 
                 if (isThereWareHouseRecord == true)
                     return new ErrorResult(Messages.NameAlreadyExist);

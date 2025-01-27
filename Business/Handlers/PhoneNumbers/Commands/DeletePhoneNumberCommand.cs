@@ -18,7 +18,7 @@ namespace Business.Handlers.PhoneNumbers.Commands
     /// </summary>
     public class DeletePhoneNumberCommand : IRequest<IResult>
     {
-        public int CreatedUserId { get; set; }
+        public int CustomerId { get; set; }
 
         public class DeletePhoneNumberCommandHandler : IRequestHandler<DeletePhoneNumberCommand, IResult>
         {
@@ -36,7 +36,7 @@ namespace Business.Handlers.PhoneNumbers.Commands
             [SecuredOperation(Priority = 1)]
             public async Task<IResult> Handle(DeletePhoneNumberCommand request, CancellationToken cancellationToken)
             {
-                var phoneNumberToDelete = _phoneNumberRepository.Get(p => p.CreatedUserId == request.CreatedUserId);
+                var phoneNumberToDelete = _phoneNumberRepository.Get(p => p.CustomerId == request.CustomerId);
 
                 _phoneNumberRepository.Delete(phoneNumberToDelete);
                 await _phoneNumberRepository.SaveChangesAsync();

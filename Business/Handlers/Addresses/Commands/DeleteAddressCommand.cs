@@ -18,7 +18,8 @@ namespace Business.Handlers.Addresses.Commands
     /// </summary>
     public class DeleteAddressCommand : IRequest<IResult>
     {
-        public int CreatedUserId { get; set; }
+        public string Street { get; set; } // Cadde adı
+        public int StreetNumber { get; set; } // Sokak numarası
 
         public class DeleteAddressCommandHandler : IRequestHandler<DeleteAddressCommand, IResult>
         {
@@ -34,9 +35,9 @@ namespace Business.Handlers.Addresses.Commands
             [CacheRemoveAspect("Get")]
             [LogAspect(typeof(PostgreSqlLogger))]
             [SecuredOperation(Priority = 1)]
-            public async Task<IResult> Handle(DeleteAddressCommand request, CancellationToken cancellationToken)
+            public async Task<IResult> Handle(DeleteAddressCommand request, CancellationToken cancellationToken) 
             {
-                var addressToDelete = _addressRepository.Get(p => p.CreatedUserId == request.CreatedUserId);
+                var addressToDelete = _addressRepository.Get(p => p.Street == request.Street && p.StreetNumber == request.StreetNumber);
 
                 _addressRepository.Delete(addressToDelete);
                 await _addressRepository.SaveChangesAsync();

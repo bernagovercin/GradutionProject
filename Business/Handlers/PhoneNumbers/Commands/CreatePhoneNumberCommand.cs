@@ -49,7 +49,7 @@ namespace Business.Handlers.PhoneNumbers.Commands
             [SecuredOperation(Priority = 1)]
             public async Task<IResult> Handle(CreatePhoneNumberCommand request, CancellationToken cancellationToken)
             {
-                var isTherePhoneNumberRecord = _phoneNumberRepository.Query().Any(u => u.CreatedDate == request.CreatedDate);
+                var isTherePhoneNumberRecord = _phoneNumberRepository.Query().Any(u => u.CustomerId == request.CustomerId);
 
                 if (isTherePhoneNumberRecord == true)
                     return new ErrorResult(Messages.NameAlreadyExist);

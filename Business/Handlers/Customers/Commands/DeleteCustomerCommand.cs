@@ -18,7 +18,7 @@ namespace Business.Handlers.Customers.Commands
     /// </summary>
     public class DeleteCustomerCommand : IRequest<IResult>
     {
-        public int CreatedUserId { get; set; }
+        public int CustomerId { get; set; }
 
         public class DeleteCustomerCommandHandler : IRequestHandler<DeleteCustomerCommand, IResult>
         {
@@ -36,7 +36,7 @@ namespace Business.Handlers.Customers.Commands
             [SecuredOperation(Priority = 1)]
             public async Task<IResult> Handle(DeleteCustomerCommand request, CancellationToken cancellationToken)
             {
-                var customerToDelete = _customerRepository.Get(p => p.CreatedUserId == request.CreatedUserId);
+                var customerToDelete = _customerRepository.Get(p => p.CustomerId == request.CustomerId);
 
                 _customerRepository.Delete(customerToDelete);
                 await _customerRepository.SaveChangesAsync();

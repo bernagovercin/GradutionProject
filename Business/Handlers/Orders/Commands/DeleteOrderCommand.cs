@@ -18,7 +18,7 @@ namespace Business.Handlers.Orders.Commands
     /// </summary>
     public class DeleteOrderCommand : IRequest<IResult>
     {
-        public int CreatedUserId { get; set; }
+        public int Id { get; set; }
 
         public class DeleteOrderCommandHandler : IRequestHandler<DeleteOrderCommand, IResult>
         {
@@ -36,7 +36,7 @@ namespace Business.Handlers.Orders.Commands
             [SecuredOperation(Priority = 1)]
             public async Task<IResult> Handle(DeleteOrderCommand request, CancellationToken cancellationToken)
             {
-                var orderToDelete = _orderRepository.Get(p => p.CreatedUserId == request.CreatedUserId);
+                var orderToDelete = _orderRepository.Get(p => p.Id == request.Id);
 
                 _orderRepository.Delete(orderToDelete);
                 await _orderRepository.SaveChangesAsync();

@@ -14,7 +14,7 @@ namespace Business.Handlers.Orders.Queries
 {
     public class GetOrderQuery : IRequest<IDataResult<Order>>
     {
-        public int CreatedUserId { get; set; }
+        public int Id { get; set; }
 
         public class GetOrderQueryHandler : IRequestHandler<GetOrderQuery, IDataResult<Order>>
         {
@@ -30,7 +30,7 @@ namespace Business.Handlers.Orders.Queries
             [SecuredOperation(Priority = 1)]
             public async Task<IDataResult<Order>> Handle(GetOrderQuery request, CancellationToken cancellationToken)
             {
-                var order = await _orderRepository.GetAsync(p => p.CreatedUserId == request.CreatedUserId);
+                var order = await _orderRepository.GetAsync(p => p.Id == request.Id);
                 return new SuccessDataResult<Order>(order);
             }
         }

@@ -14,7 +14,7 @@ namespace Business.Handlers.PhoneNumbers.Queries
 {
     public class GetPhoneNumberQuery : IRequest<IDataResult<PhoneNumber>>
     {
-        public int CreatedUserId { get; set; }
+        public int CustomerId { get; set; }
 
         public class GetPhoneNumberQueryHandler : IRequestHandler<GetPhoneNumberQuery, IDataResult<PhoneNumber>>
         {
@@ -30,7 +30,7 @@ namespace Business.Handlers.PhoneNumbers.Queries
             [SecuredOperation(Priority = 1)]
             public async Task<IDataResult<PhoneNumber>> Handle(GetPhoneNumberQuery request, CancellationToken cancellationToken)
             {
-                var phoneNumber = await _phoneNumberRepository.GetAsync(p => p.CreatedUserId == request.CreatedUserId);
+                var phoneNumber = await _phoneNumberRepository.GetAsync(p => p.CustomerId == request.CustomerId);
                 return new SuccessDataResult<PhoneNumber>(phoneNumber);
             }
         }

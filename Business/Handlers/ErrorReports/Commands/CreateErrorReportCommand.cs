@@ -52,7 +52,7 @@ namespace Business.Handlers.ErrorReports.Commands
             [SecuredOperation(Priority = 1)]
             public async Task<IResult> Handle(CreateErrorReportCommand request, CancellationToken cancellationToken)
             {
-                var isThereErrorReportRecord = _errorReportRepository.Query().Any(u => u.CreatedDate == request.CreatedDate);
+                var isThereErrorReportRecord = _errorReportRepository.Query().Any(u => u.Title == request.Title && u.Severity == request.Severity);
 
                 if (isThereErrorReportRecord == true)
                     return new ErrorResult(Messages.NameAlreadyExist);

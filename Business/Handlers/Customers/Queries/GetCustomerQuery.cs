@@ -14,7 +14,7 @@ namespace Business.Handlers.Customers.Queries
 {
     public class GetCustomerQuery : IRequest<IDataResult<Customer>>
     {
-        public int CreatedUserId { get; set; }
+        public int CustomerId { get; set; }
 
         public class GetCustomerQueryHandler : IRequestHandler<GetCustomerQuery, IDataResult<Customer>>
         {
@@ -30,7 +30,7 @@ namespace Business.Handlers.Customers.Queries
             [SecuredOperation(Priority = 1)]
             public async Task<IDataResult<Customer>> Handle(GetCustomerQuery request, CancellationToken cancellationToken)
             {
-                var customer = await _customerRepository.GetAsync(p => p.CreatedUserId == request.CreatedUserId);
+                var customer = await _customerRepository.GetAsync(p => p.CustomerId == request.CustomerId);
                 return new SuccessDataResult<Customer>(customer);
             }
         }

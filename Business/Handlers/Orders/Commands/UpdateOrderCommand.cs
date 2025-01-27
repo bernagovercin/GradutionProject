@@ -48,7 +48,7 @@ namespace Business.Handlers.Orders.Commands
             [SecuredOperation(Priority = 1)]
             public async Task<IResult> Handle(UpdateOrderCommand request, CancellationToken cancellationToken)
             {
-                var isThereOrderRecord = await _orderRepository.GetAsync(u => u.CreatedUserId == request.CreatedUserId);
+                var isThereOrderRecord = await _orderRepository.GetAsync(u => u.Id == request.Id);
 
 
                 isThereOrderRecord.CreatedDate = request.CreatedDate;

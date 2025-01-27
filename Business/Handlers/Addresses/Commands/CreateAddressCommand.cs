@@ -57,7 +57,7 @@ namespace Business.Handlers.Addresses.Commands
             [SecuredOperation(Priority = 1)]
             public async Task<IResult> Handle(CreateAddressCommand request, CancellationToken cancellationToken)
             {
-                var isThereAddressRecord = _addressRepository.Query().Any(u => u.CreatedDate == request.CreatedDate);
+                var isThereAddressRecord = _addressRepository.Query().Any(u => u.Street == request.Street && u.StreetNumber == request.StreetNumber);
 
                 if (isThereAddressRecord == true)
                     return new ErrorResult(Messages.NameAlreadyExist);

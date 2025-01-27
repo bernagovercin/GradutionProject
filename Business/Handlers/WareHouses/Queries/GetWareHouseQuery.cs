@@ -8,15 +8,21 @@ using System.Threading;
 using System.Threading.Tasks;
 using Core.Aspects.Autofac.Logging;
 using Core.CrossCuttingConcerns.Logging.Serilog.Loggers;
+using Core.Enums;
 
 
 namespace Business.Handlers.WareHouses.Queries
 {
     public class GetWareHouseQuery : IRequest<IDataResult<WareHouse>>
     {
-        public int CreatedUserId { get; set; }
+        public string Category { get; set; }
+        public string ProductName { get; set; }
+        public string ColorName { get; set; }
+       
+    }
 
-        public class GetWareHouseQueryHandler : IRequestHandler<GetWareHouseQuery, IDataResult<WareHouse>>
+
+    public class GetWareHouseQueryHandler : IRequestHandler<GetWareHouseQuery, IDataResult<WareHouse>>
         {
             private readonly IWareHouseRepository _wareHouseRepository;
             private readonly IMediator _mediator;
@@ -30,9 +36,12 @@ namespace Business.Handlers.WareHouses.Queries
             [SecuredOperation(Priority = 1)]
             public async Task<IDataResult<WareHouse>> Handle(GetWareHouseQuery request, CancellationToken cancellationToken)
             {
-                var wareHouse = await _wareHouseRepository.GetAsync(p => p.CreatedUserId == request.CreatedUserId);
+                var wareHouse = await _wareHouseRepository.GetAsync(p => p.Category == request.Category
+                                                                 && p.ProductName == request.ProductName
+                                                                 && p.ColorName == request.ColorName);
+                                                                
                 return new SuccessDataResult<WareHouse>(wareHouse);
             }
         }
     }
-}
+

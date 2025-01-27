@@ -18,7 +18,8 @@ namespace Business.Handlers.ErrorReports.Commands
     /// </summary>
     public class DeleteErrorReportCommand : IRequest<IResult>
     {
-        public int CreatedUserId { get; set; }
+        public string Title { get; set; }
+        public string Severity { get; set; }
 
         public class DeleteErrorReportCommandHandler : IRequestHandler<DeleteErrorReportCommand, IResult>
         {
@@ -36,7 +37,7 @@ namespace Business.Handlers.ErrorReports.Commands
             [SecuredOperation(Priority = 1)]
             public async Task<IResult> Handle(DeleteErrorReportCommand request, CancellationToken cancellationToken)
             {
-                var errorReportToDelete = _errorReportRepository.Get(p => p.CreatedUserId == request.CreatedUserId);
+                var errorReportToDelete = _errorReportRepository.Get(p => p.Title == request.Title && p.Severity == request.Severity); ;
 
                 _errorReportRepository.Delete(errorReportToDelete);
                 await _errorReportRepository.SaveChangesAsync();

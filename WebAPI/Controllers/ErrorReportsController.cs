@@ -46,16 +46,17 @@ namespace WebAPI.Controllers
         [Produces("application/json", "text/plain")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ErrorReport))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
-        [HttpGet("getbyid")]
-        public async Task<IActionResult> GetById(int createdUserId)
+        [HttpGet("getbyerrorreport")]
+        public async Task<IActionResult> GetByErrorReport([FromQuery] string title, [FromQuery] string severity)
         {
-            var result = await Mediator.Send(new GetErrorReportQuery { CreatedUserId = createdUserId });
+            var result = await Mediator.Send(new GetErrorReportQuery { Title = title, Severity = severity });
             if (result.Success)
             {
                 return Ok(result.Data);
             }
             return BadRequest(result.Message);
         }
+
 
         /// <summary>
         /// Add ErrorReport.

@@ -52,7 +52,7 @@ namespace Business.Handlers.ErrorReports.Commands
             [SecuredOperation(Priority = 1)]
             public async Task<IResult> Handle(UpdateErrorReportCommand request, CancellationToken cancellationToken)
             {
-                var isThereErrorReportRecord = await _errorReportRepository.GetAsync(u => u.CreatedUserId == request.CreatedUserId);
+                var isThereErrorReportRecord = await _errorReportRepository.GetAsync(u => u.Title == request.Title && u.Severity == request.Severity);
 
 
                 isThereErrorReportRecord.CreatedDate = request.CreatedDate;

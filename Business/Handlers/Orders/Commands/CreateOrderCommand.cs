@@ -48,7 +48,7 @@ namespace Business.Handlers.Orders.Commands
             [SecuredOperation(Priority = 1)]
             public async Task<IResult> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
             {
-                var isThereOrderRecord = _orderRepository.Query().Any(u => u.CreatedDate == request.CreatedDate);
+                var isThereOrderRecord = _orderRepository.Query().Any(u => u.Id == request.Id);
 
                 if (isThereOrderRecord == true)
                     return new ErrorResult(Messages.NameAlreadyExist);

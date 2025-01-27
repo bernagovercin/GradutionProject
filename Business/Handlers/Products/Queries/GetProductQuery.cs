@@ -14,7 +14,10 @@ namespace Business.Handlers.Products.Queries
 {
     public class GetProductQuery : IRequest<IDataResult<Product>>
     {
-        public int CreatedUserId { get; set; }
+        public string Category { get; set; }
+        public string ProductName { get; set; }
+        public string ColorName { get; set; }
+
 
         public class GetProductQueryHandler : IRequestHandler<GetProductQuery, IDataResult<Product>>
         {
@@ -30,7 +33,10 @@ namespace Business.Handlers.Products.Queries
             [SecuredOperation(Priority = 1)]
             public async Task<IDataResult<Product>> Handle(GetProductQuery request, CancellationToken cancellationToken)
             {
-                var product = await _productRepository.GetAsync(p => p.CreatedUserId == request.CreatedUserId);
+                var product = await _productRepository.GetAsync(p => p.Category == request.Category
+                                                      && p.ProductName == request.ProductName
+                                                      && p.ColorName == request.ColorName);
+
                 return new SuccessDataResult<Product>(product);
             }
         }

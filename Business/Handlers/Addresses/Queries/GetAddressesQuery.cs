@@ -34,7 +34,7 @@ namespace Business.Handlers.Addresses.Queries
             [SecuredOperation(Priority = 1)]
             public async Task<IDataResult<IEnumerable<Address>>> Handle(GetAddressesQuery request, CancellationToken cancellationToken)
             {
-                return new SuccessDataResult<IEnumerable<Address>>(await _addressRepository.GetListAsync());
+                return new SuccessDataResult<IEnumerable<Address>>(await _addressRepository.GetListAsync()); 
             }
         }
     }

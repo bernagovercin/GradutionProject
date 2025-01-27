@@ -49,7 +49,7 @@ namespace WebAPI.Controllers
         [HttpGet("getbyid")]
         public async Task<IActionResult> GetById(int createdUserId)
         {
-            var result = await Mediator.Send(new GetPhoneNumberQuery { CreatedUserId = createdUserId });
+            var result = await Mediator.Send(new GetPhoneNumberQuery { CustomerId = createdUserId });
             if (result.Success)
             {
                 return Ok(result.Data);
