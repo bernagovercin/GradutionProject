@@ -1,18 +1,18 @@
-Bitirme Projesi: Dev Architecture (Backend)
+## Bitirme Projesi: Dev Architecture (Backend)
 Bu proje, Dev Architecture çatısını kullanarak geliştirilmiş bir backend uygulamasıdır. Proje, sipariş yönetim sistemi ve hata yönetim sistemi olmak üzere iki ana modülden oluşmaktadır. Her iki modül de .NET tabanlı olarak geliştirilmiştir ve Elasticsearch ve Kibana entegrasyonu ile log analizi ve görselleştirme sağlanmaktadır.
 
-Modüller
-1. Sipariş Yönetim Sistemi
+## Modüller
+# 1. Sipariş Yönetim Sistemi
 Bu modül, kullanıcılara sipariş verme, sipariş takibi yapma ve sipariş geçmişini görüntüleme gibi işlemleri gerçekleştirmelerini sağlar. Siparişlerin detayları ve durumları, veritabanında saklanır ve kullanıcı etkileşimleri analiz edilir.
 
-2. Hata Yönetim Sistemi
+# 2. Hata Yönetim Sistemi
 Bu modül, kullanıcıların sistemde meydana gelen hataları bir form aracılığı ile gönderir.Yönetici olan kişiler hatayı anladıktan sonra açık/çözüldü/kapalı şeklinde işaretler.
 
-Kullanılan Araçlar ve Paketler
-1. DevArchitecture
+# Kullanılan Araçlar ve Paketler
+# 1. DevArchitecture
 DevArchitecture Backend Template Pack'i, DevArchitecture çatısı altında backend geliştirme için kullanılan temel şablonları içerir. Bu şablonlar, projelerin hızlıca yapılandırılmasını sağlar ve geliştiricilerin backend süreçlerini düzenlemelerine yardımcı olur. Visual Studio ile kolayca entegre edilerek sağlam bir temel sunar.
 
-2. DevArchitectureGen
+ # 2. DevArchitectureGen
 DevArchitectureGen bir Kod Üreteci aracıdır. Backend geliştirme sürecinde model tabanlı yaklaşım kullanarak hızlıca kod üretmek için kullanılır. Bu araç, sürekli geliştirme yapan projelerde zaman kazanılmasına yardımcı olur ve yazılım geliştirme sürecini daha verimli hale getirir.
 
 Kurulum
