@@ -1,0 +1,1 @@
+Bu proje Bilgisayar Mühendisliği lisans bitirme projemin back-end mimarisini içermektedir.Web Projelerinde Hata Yönetimi ve Otomatik Karar Mekanizmaları                                                                                    
