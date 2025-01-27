@@ -3,7 +3,7 @@ Bu proje, Dev Architecture çatısını kullanarak geliştirilmiş bir backend u
 
 ## Modüller
 ### 1. Sipariş Yönetim Sistemi
-Bu modül, kullanıcılara sipariş verme, sipariş takibi yapma ve sipariş geçmişini görüntüleme gibi işlemleri gerçekleştirmelerini sağlar. Siparişlerin detayları ve durumları, veritabanında saklanır ve kullanıcı etkileşimleri analiz edilir.
+Bu modül, kullanıcı oluşturma,ürün tanımlama,sipariş verme, ürün depo bilgisi sunma, sipariş takibi yapma ve sipariş geçmişini görüntüleme gibi işlemleri gerçekleştirmelerini sağlar. Siparişlerin detayları ve durumları, veritabanında saklanır ve kullanıcı etkileşimleri analiz edilir.
 
 ### 2. Hata Yönetim Sistemi
 Bu modül, kullanıcıların sistemde meydana gelen hataları bir form aracılığı ile gönderir.Yönetici olan kişiler hatayı anladıktan sonra açık/çözüldü/kapalı şeklinde işaretler.
