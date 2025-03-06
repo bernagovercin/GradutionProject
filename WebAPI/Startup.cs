@@ -25,6 +25,7 @@ using Swashbuckle.AspNetCore.SwaggerUI;
 using ConfigurationManager = Business.ConfigurationManager;
 using OpenTelemetry;
 using OpenTelemetry.Metrics;
+using Core.Services;
 
 
 
@@ -46,6 +47,7 @@ namespace WebAPI
         }
 
 
+
         /// <summary>
         /// This method gets called by the runtime. Use this method to add services to the container.
         /// </summary>
@@ -62,7 +64,9 @@ namespace WebAPI
                 {
                     options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
                     options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+
                 });
+            services.AddScoped<FileService>(); // Bu satırı ekle
 
             services.AddApiVersioning(v =>
             {

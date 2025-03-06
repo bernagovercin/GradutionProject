@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Entities.Concrete;
 using System.Collections.Generic;
+using Core.Services;
 
 namespace WebAPI.Controllers
 {
@@ -17,6 +18,8 @@ namespace WebAPI.Controllers
     [ApiController]
     public class ProductsController : BaseApiController
     {
+        
+
         ///<summary>
         ///List Products
         ///</summary>
@@ -75,6 +78,26 @@ namespace WebAPI.Controllers
                 return Ok(result.Message);
             }
             return BadRequest(result.Message);
+        }
+
+        private readonly FileService _fileService;
+
+        // Constructor'da DI ile _fileService enjekte ediliyor
+        public ProductsController(FileService fileService)
+        {
+            _fileService = fileService;
+        }
+
+        [HttpPost("uploadImage")]
+        public async Task<IActionResult> UploadProductImage(IFormFile file)
+        {
+            if (file == null || file.Length == 0)
+            {
+                return BadRequest("No file uploaded.");
+            }
+
+            var filePath = await _fileService.SaveFileAsync(file);  // Görsel kaydedilir
+            return Ok(new { FilePath = filePath });  // Yolu döndür
         }
 
         /// <summary>

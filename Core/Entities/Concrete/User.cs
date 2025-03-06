@@ -30,6 +30,7 @@ namespace Core.Entities.Concrete
         public string Address { get; set; }
         public string Notes { get; set; }
         public DateTime UpdateContactDate { get; set; }
+        public string Ýmagepath { get; set; }
 
         /// <summary>
         /// This is required when encoding token. Not in db. The default is Person.
